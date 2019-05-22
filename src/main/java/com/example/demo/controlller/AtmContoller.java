@@ -40,7 +40,7 @@ public class AtmContoller {
 
     }
 
-    @ApiOperation(value = "Updaye atm", response = AtmDto.class)
+    @ApiOperation(value = "Update atm", response = AtmDto.class)
     @RequestMapping(value = "/atm's", method = RequestMethod.PUT)
     public void updateAtm(Atm atm) {
         atmService.saveOrUpdate(atm);
