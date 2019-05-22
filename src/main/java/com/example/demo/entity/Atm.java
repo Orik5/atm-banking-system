@@ -1,10 +1,19 @@
 package com.example.demo.entity;
 
 import com.example.demo.entity.Enum.ConvertBanknote;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "atm")
 public class Atm {
@@ -13,21 +22,6 @@ public class Atm {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int atmId;
     private BigDecimal balance;
-
-    public Atm() {
-    }
-
-    public Atm(BigDecimal balance) {
-        this.balance = balance;
-    }
-
-    public int getAtmId() {
-        return atmId;
-    }
-
-    public void setAtmId(int atmId) {
-        this.atmId = atmId;
-    }
 
     public BigDecimal getBalance() {
         return balance;

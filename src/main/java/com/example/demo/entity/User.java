@@ -1,9 +1,17 @@
 package com.example.demo.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "user")
 public class User {
@@ -19,45 +27,6 @@ public class User {
     private BigDecimal temporarySafeBalanceAfterGetting;
 
 
-    public User(String userName, String password, BigDecimal balance,
-                String mobilePhone, String surname, String middleName,
-                BigDecimal temporarySafeBalanceAfterGetting) {
-        this.userName = userName;
-        this.password = password;
-        this.balance = balance;
-        this.mobilePhone = mobilePhone;
-        this.surname = surname;
-        this.middleName = middleName;
-        this.temporarySafeBalanceAfterGetting = temporarySafeBalanceAfterGetting;
-    }
-
-    public User() {
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public BigDecimal getBalance() {
         return balance;
     }
@@ -67,35 +36,5 @@ public class User {
         return balance;
     }
 
-    public BigDecimal getTemporarySafeBalanceAfterGetting() {
-        return temporarySafeBalanceAfterGetting;
-    }
 
-    public void setTemporarySafeBalanceAfterGetting(BigDecimal temporarySafeBalanceAfterGetting) {
-        this.temporarySafeBalanceAfterGetting = temporarySafeBalanceAfterGetting;
-    }
-
-    public String getMobilePhone() {
-        return mobilePhone;
-    }
-
-    public void setMobilePhone(String mobilePhone) {
-        this.mobilePhone = mobilePhone;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
 }
