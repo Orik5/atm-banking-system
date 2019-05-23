@@ -1,5 +1,6 @@
 package com.example.demo.controlller;
 
+import com.example.demo.domain.User;
 import com.example.demo.dto.AtmDto;
 import com.example.demo.domain.Atm;
 import com.example.demo.exception.RangeNotSatisfiableException;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 
 @RestController
 @RequestMapping("atm-banking-system")
@@ -34,14 +36,14 @@ public class AtmController {
 
     @ApiOperation(value = "withdraw", response = AtmDto.class)
     @RequestMapping(value = "/atms/withdraw", method = RequestMethod.PUT)
-    public void withdraw(Atm atm, BigDecimal money) throws RangeNotSatisfiableException {
-        atmService.withdraw(atm, money);
+    public void withdraw(Atm atm, BigDecimal money, HashSet<User>users,String name) throws RangeNotSatisfiableException {
+        atmService.withdraw(atm, money,users,name);
     }
 
     @ApiOperation(value = "put-cash-into", response = AtmDto.class)
     @RequestMapping(value = "/atms/put-cash-into", method = RequestMethod.PUT)
-    public void putCashIntoAtm(Atm atm, BigDecimal money) throws RangeNotSatisfiableException {
-        atmService.putCashIntoAtm(atm, money);
+    public void putCashIntoAtm(Atm atm, BigDecimal money,HashSet<User>users,String name) throws RangeNotSatisfiableException {
+        atmService.putCashIntoAtm(atm, money,users,name);
     }
 
 

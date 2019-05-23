@@ -1,6 +1,8 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.domain.User;
+import com.example.demo.exception.EmptyBallanceException;
+import com.example.demo.exception.IncorrectUserNameException;
 import com.example.demo.repository.AtmRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.AbstractService;
@@ -24,7 +26,8 @@ public class UserService extends AbstractService<User, UserRepository> {
         userRepository.findByName(entity);
     }
 
-    public void sendMoneyToAnotherUser(BigDecimal money, HashSet<User> users, String myName, String username) {
+    public void sendMoneyToAnotherUser(User user, BigDecimal money, HashSet<User> users, String myName, String username) throws IncorrectUserNameException, EmptyBallanceException {
+
         for (User person :
                 users) {
             if (person.getUserName().equals(myName)) {
@@ -38,10 +41,13 @@ public class UserService extends AbstractService<User, UserRepository> {
                             person2.setBalance(addPerson1);
                             person.setBalance(substrPerson2);
                         }
+                        throw new EmptyBallanceException("Your balance is empty");
 
                     }
+                    throw new IncorrectUserNameException("Incorrect user name, please insert valid name");
                 }
             }
+            throw new IncorrectUserNameException("Incorrect user name, please insert valid name");
         }
     }
 }
