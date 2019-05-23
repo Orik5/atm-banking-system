@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+
 @RestController
 @RequestMapping("atm-banking-system")
 @Api(value = "atm-banking-system")
@@ -62,10 +63,5 @@ public class UserController {
         userService.delete(id);
     }
 
-    @ApiOperation(value = "Find by username", response = AtmDto.class)
 
-    @RequestMapping(value = "/users/{user-name}", method = RequestMethod.GET)
-    public void findByUserName(String name) {
-        userService.findByName(name);
-    }
 }

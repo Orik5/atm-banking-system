@@ -2,6 +2,7 @@ package com.example.demo.controlller;
 
 import com.example.demo.dto.AtmDto;
 import com.example.demo.domain.Atm;
+import com.example.demo.exception.RangeNotSatisfiableException;
 import com.example.demo.service.impl.AtmService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -18,7 +19,7 @@ import java.math.BigDecimal;
 @RequestMapping("atm-banking-system")
 @Api(value = "atm-banking-system")
 
-public class AtmContoller {
+public class AtmController {
 
     @Autowired
     private AtmService atmService;
@@ -30,28 +31,16 @@ public class AtmContoller {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     }
     )
-    @ApiOperation(value = "Get atm by id", response = AtmDto.class)
-    @RequestMapping(value = "/atms/{id}", method = RequestMethod.GET)
-    public void findById(Integer id) {
-        atmService.findById(id);
-
-    }
-
-    @ApiOperation(value = "Update atm", response = AtmDto.class)
-    @RequestMapping(value = "/atms", method = RequestMethod.PUT)
-    public void updateAtm(Atm atm) {
-        atmService.saveOrUpdate(atm);
-    }
 
     @ApiOperation(value = "withdraw", response = AtmDto.class)
     @RequestMapping(value = "/atms/withdraw", method = RequestMethod.POST)
-    public void withdraw(Atm atm, BigDecimal money) {
+    public void withdraw(Atm atm, BigDecimal money) throws RangeNotSatisfiableException {
         atmService.withdraw(atm, money);
     }
 
     @ApiOperation(value = "put-cash-into", response = AtmDto.class)
     @RequestMapping(value = "/atms/put-cash-into", method = RequestMethod.POST)
-    public void putCashIntoAtm(Atm atm, BigDecimal money) {
+    public void putCashIntoAtm(Atm atm, BigDecimal money) throws RangeNotSatisfiableException {
         atmService.putCashIntoAtm(atm, money);
     }
 

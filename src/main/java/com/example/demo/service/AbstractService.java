@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.domain.AbstractEntity;
 import com.example.demo.domain.User;
+import com.example.demo.exception.RangeNotSatisfiableException;
 import com.example.demo.repository.CommonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -45,11 +46,8 @@ public abstract class AbstractService<E extends AbstractEntity, R extends Common
     }
 
     @Override
-    public void findByName(String entityname) {
-
-
-
-}
+    public void findByName(String entity) {
+    }
 
     @Override
     public List<E> list() {
@@ -57,12 +55,12 @@ public abstract class AbstractService<E extends AbstractEntity, R extends Common
     }
 
     @Override
-    public void withdraw(E entity, BigDecimal type) {
+    public void withdraw(E entity, BigDecimal type) throws RangeNotSatisfiableException {
 
     }
 
     @Override
-    public void putCashIntoAtm(E entity, BigDecimal type) {
+    public void putCashIntoAtm(E entity, BigDecimal type) throws RangeNotSatisfiableException {
 
     }
 

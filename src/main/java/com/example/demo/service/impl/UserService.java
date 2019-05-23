@@ -9,31 +9,24 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
-
 @Service
 public class UserService extends AbstractService<User, UserRepository> {
 
     @Autowired
     private UserRepository userRepository;
 
-
     protected UserService(UserRepository repository) {
         super(repository);
     }
 
-    public void findByName(String entityname) {
-
-        userRepository.findByName(entityname);
-
+    public void findByName(String entity) {
+        userRepository.findByName(entity);
     }
+
     @Override
     public void sendMoneyToAnotherUser(User user, BigDecimal money) {
-
         BigDecimal currentBalance = user.getBalance();
-
         userRepository.findByName(user.getUserName());
         user.setTemporarySafeBalanceAfterGetting(money.subtract(currentBalance));
     }
-
-
 }

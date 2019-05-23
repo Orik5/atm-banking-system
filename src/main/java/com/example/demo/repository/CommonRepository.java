@@ -8,6 +8,4 @@ import org.springframework.data.repository.NoRepositoryBean;
 @NoRepositoryBean
 public interface CommonRepository<E extends AbstractEntity,N> extends JpaRepository<E ,Integer> {
 
-
-
 }
