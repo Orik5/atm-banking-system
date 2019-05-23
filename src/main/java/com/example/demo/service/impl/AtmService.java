@@ -27,8 +27,7 @@ public class AtmService extends AbstractService<Atm, AtmRepository> {
             if ((atm.getBalance().intValue() > user.setBalance(money).intValue()) &&
                     user.setBalance(money).intValue() % currentDenomination.intValue() == 0) {
                 BigDecimal substr = atm.getBalance().subtract(user.setBalance(money));
-                BigDecimal s = user.getBalance().add(substr);
-                user.setBalance(s);
+                atm.setBalance(substr);
             }
             throw new RangeNotSatisfiableException("Incorrect amount requested");
         }
@@ -38,12 +37,14 @@ public class AtmService extends AbstractService<Atm, AtmRepository> {
     public void putCashIntoAtm(Atm atm, BigDecimal money) throws RangeNotSatisfiableException {
         List<BigDecimal> denominations = getDenominations();
         for (BigDecimal currentDenomination : denominations) {
-            if ((atm.setBalance(money).compareTo(atm.getBalance()) > atm.getBalance().intValue()) &&
-                    atm.setBalance(money).intValue() % currentDenomination.intValue() == 0) {
-                BigDecimal substr = user.getBalance().subtract(atm.setBalance(money));
-                BigDecimal s = atm.getBalance().add(substr);
-                atm.setBalance(s);
+            if ((user.setBalance(money).intValue()) > 0 &&
+                    user.setBalance(money).intValue() % currentDenomination.intValue() == 0) {
+                BigDecimal substrAtm = atm.getBalance().add(user.setBalance(money));
+                BigDecimal substrUser = user.getBalance().subtract(user.setBalance(money));
+                user.setBalance(substrUser);
+                atm.setBalance(substrAtm);
             }
+
             throw new RangeNotSatisfiableException("Incorrect amount requested");
         }
     }

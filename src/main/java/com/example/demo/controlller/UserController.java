@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 
 @RestController
 @RequestMapping("atm-banking-system")
@@ -45,7 +46,7 @@ public class UserController {
     @ApiOperation(value = "Add user", response = UserDto.class)
     @RequestMapping(value = "/users", method = RequestMethod.POST)
     public void addUser(@RequestBody User user) {
-      userService.create(user);
+        userService.create(user);
     }
 
     @ApiOperation(value = "Update user", response = UserDto.class)
@@ -55,9 +56,9 @@ public class UserController {
     }
 
     @ApiOperation(value = "Send money to another user", response = UserDto.class)
-    @RequestMapping(value = "/users/send-to-user", method = RequestMethod.POST)
-    public void sendMoneyToAnotherUser(User user, BigDecimal money) {
-        userService.sendMoneyToAnotherUser(user, money);
+    @RequestMapping(value = "/users/send-to-user", method = RequestMethod.PUT)
+    public void sendMoneyToAnotherUser(User user, BigDecimal money, HashSet<User> users, String myName, String username) {
+        userService.sendMoneyToAnotherUser(money, users, myName, username);
     }
 
     @ApiOperation(value = "Delete user", response = UserDto.class)

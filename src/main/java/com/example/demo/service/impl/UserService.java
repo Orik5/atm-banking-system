@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 
 @Service
 public class UserService extends AbstractService<User, UserRepository> {
@@ -23,9 +24,24 @@ public class UserService extends AbstractService<User, UserRepository> {
         userRepository.findByName(entity);
     }
 
-    public void sendMoneyToAnotherUser(User user, BigDecimal money) {
-        BigDecimal currentBalance = user.getBalance();
-        userRepository.findByName(user.getUserName());
-        user.setTemporarySafeBalanceAfterGetting(money.subtract(currentBalance));
+    public void sendMoneyToAnotherUser(BigDecimal money, HashSet<User> users, String myName, String username) {
+        for (User person :
+                users) {
+            if (person.getUserName().equals(myName)) {
+                for (User person2 : users
+                ) {
+                    if (person2.getUserName().equals(username)) {
+                        if ((person.getBalance().intValue()) > 0 &&
+                                person.setBalance(money).intValue() > 0) {
+                            BigDecimal addPerson1 = person.setBalance(money).add(person2.getBalance());
+                            BigDecimal substrPerson2 = person.getBalance().subtract(person.setBalance(money));
+                            person2.setBalance(addPerson1);
+                            person.setBalance(substrPerson2);
+                        }
+
+                    }
+                }
+            }
+        }
     }
 }
