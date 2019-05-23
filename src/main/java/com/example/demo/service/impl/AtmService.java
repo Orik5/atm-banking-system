@@ -1,9 +1,9 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.Atm;
-import com.example.demo.entity.User;
+import com.example.demo.domain.Atm;
+import com.example.demo.domain.User;
 import com.example.demo.repository.AtmRepository;
-import com.example.demo.service.AtmService;
+import com.example.demo.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,29 +13,16 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class AtmServiceImpl implements AtmService<Atm, Integer, BigDecimal> {
-    private final static ArrayList<BigDecimal> denominations = new ArrayList(Arrays.asList(100, 200, 500));
+public class AtmService extends AbstractService<Atm, AtmRepository> {
 
-
-    @Autowired
-    private AtmRepository atmRepository;
 
 
     private User user;
 
-
-    @Override
-    public void saveOrUpdate(Atm entity) {
-        atmRepository.save(entity);
-
+    protected AtmService(AtmRepository repository) {
+        super(repository);
     }
 
-
-
-    @Override
-    public void findById(Integer id) {
-        atmRepository.findById(id);
-    }
 
     @Override
     public void withdraw(Atm atm, BigDecimal money) {
@@ -51,13 +38,6 @@ public class AtmServiceImpl implements AtmService<Atm, Integer, BigDecimal> {
         }
 
     }
-
-
-    @Override
-    public List<BigDecimal> getDenominations() {
-        return denominations;
-    }
-
     @Override
     public void putCashIntoAtm(Atm atm, BigDecimal money) {
         List<BigDecimal> denominations = getDenominations();

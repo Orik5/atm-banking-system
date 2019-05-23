@@ -1,9 +1,8 @@
 package com.example.demo.controlller;
 
 import com.example.demo.dto.AtmDto;
-import com.example.demo.dto.UserDto;
-import com.example.demo.entity.User;
-import com.example.demo.service.impl.UserServiceImpl;
+import com.example.demo.domain.User;
+import com.example.demo.service.impl.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -12,13 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-
 @RestController
 @RequestMapping("atm-banking-system")
 @Api(value = "atm-banking-system")
 public class UserController {
     @Autowired
-    UserServiceImpl userService;
+    UserService userService;
 
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully l list"),
@@ -43,7 +41,7 @@ public class UserController {
     @ApiOperation(value = "Add user", response = AtmDto.class)
     @RequestMapping(value = "/users", method = RequestMethod.POST)
     public void addUser(@RequestBody User user) {
-        userService.add(user);
+        userService.create(user);
     }
 
     @ApiOperation(value = "Update user", response = AtmDto.class)
@@ -53,7 +51,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "Send money to another user", response = AtmDto.class)
-    @RequestMapping(value = "/users/send-to-user", method = RequestMethod.PUT)
+    @RequestMapping(value = "/users/send-to-user", method = RequestMethod.POST)
     public void sendMoneyToAnotherUser(User user, BigDecimal money) {
         userService.sendMoneyToAnotherUser(user, money);
     }
@@ -68,6 +66,6 @@ public class UserController {
 
     @RequestMapping(value = "/users/{user-name}", method = RequestMethod.GET)
     public void findByUserName(String name) {
-        userService.findByUserName(name);
+        userService.findByName(name);
     }
 }

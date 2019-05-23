@@ -1,7 +1,7 @@
 package com.example.demo.dto;
 
 
-import com.example.demo.entity.User;
+import com.example.demo.domain.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,9 +26,8 @@ public class UserDto {
     private String middleName;
     private BigDecimal temporarySafeBalanceAfterGetting;
 
-
     public static UserDto convertToDto(User user) {
-        return new UserDto(user.getUserId(), user.getUserName(), user.getPassword(), user.getBalance(),
+        return new UserDto(user.getId(), user.getUserName(), user.getPassword(), user.getBalance(),
                 user.getPassword(), user.getMobilePhone(), user.getMiddleName(), user
                 .getTemporarySafeBalanceAfterGetting());
 

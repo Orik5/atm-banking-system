@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.demo.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,24 +8,16 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "user")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
-    private String userName;
-    private String password;
-    private BigDecimal balance;
-    private String mobilePhone;
-    private String surname;
-    private String middleName;
-    private BigDecimal temporarySafeBalanceAfterGetting;
+@Table(name = "atm")
+public class Atm extends AbstractEntity {
 
+    private BigDecimal balance;
 
     public BigDecimal getBalance() {
         return balance;
@@ -35,6 +27,4 @@ public class User {
         this.balance = balance;
         return balance;
     }
-
-
 }
