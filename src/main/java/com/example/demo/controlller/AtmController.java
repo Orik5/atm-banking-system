@@ -3,6 +3,8 @@ package com.example.demo.controlller;
 import com.example.demo.domain.User;
 import com.example.demo.dto.AtmDto;
 import com.example.demo.domain.Atm;
+import com.example.demo.exception.EmptyBallanceException;
+import com.example.demo.exception.IncorrectUserNameException;
 import com.example.demo.exception.RangeNotSatisfiableException;
 import com.example.demo.service.impl.AtmService;
 import io.swagger.annotations.Api;
@@ -36,13 +38,13 @@ public class AtmController {
 
     @ApiOperation(value = "withdraw", response = AtmDto.class)
     @RequestMapping(value = "/atms/withdraw", method = RequestMethod.PUT)
-    public void withdraw(Atm atm, BigDecimal money, HashSet<User>users,String name) throws RangeNotSatisfiableException {
+    public void withdraw(Atm atm, BigDecimal money, HashSet<User>users,String name) throws RangeNotSatisfiableException, IncorrectUserNameException {
         atmService.withdraw(atm, money,users,name);
     }
 
     @ApiOperation(value = "put-cash-into", response = AtmDto.class)
     @RequestMapping(value = "/atms/put-cash-into", method = RequestMethod.PUT)
-    public void putCashIntoAtm(Atm atm, BigDecimal money,HashSet<User>users,String name) throws RangeNotSatisfiableException {
+    public void putCashIntoAtm(Atm atm, BigDecimal money,HashSet<User>users,String name) throws RangeNotSatisfiableException, EmptyBallanceException, IncorrectUserNameException {
         atmService.putCashIntoAtm(atm, money,users,name);
     }
 

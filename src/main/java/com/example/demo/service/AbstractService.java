@@ -44,7 +44,7 @@ public abstract class AbstractService<E extends AbstractEntity, R extends Common
     }
 
     @Override
-    public void findByName(String entity) {
+    public void findByName(String name) {
     }
 
     @Override

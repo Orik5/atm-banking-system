@@ -4,6 +4,8 @@ import com.example.demo.domain.Atm;
 import com.example.demo.dto.AtmDto;
 import com.example.demo.domain.User;
 import com.example.demo.dto.UserDto;
+import com.example.demo.exception.EmptyBallanceException;
+import com.example.demo.exception.IncorrectUserNameException;
 import com.example.demo.service.impl.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -57,8 +59,8 @@ public class UserController {
 
     @ApiOperation(value = "Send money to another user", response = UserDto.class)
     @RequestMapping(value = "/users/send-to-user", method = RequestMethod.PUT)
-    public void sendMoneyToAnotherUser(User user, BigDecimal money, HashSet<User> users, String myName, String username) {
-        userService.sendMoneyToAnotherUser(money, users, myName, username);
+    public void sendMoneyToAnotherUser(User user, BigDecimal money, HashSet<User> users, String myName, String username) throws EmptyBallanceException, IncorrectUserNameException {
+        userService.sendMoneyToAnotherUser(user,money, users, myName, username);
     }
 
     @ApiOperation(value = "Delete user", response = UserDto.class)
