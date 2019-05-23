@@ -16,7 +16,8 @@ public abstract class AbstractService<E extends AbstractEntity, R extends Common
 
     protected final R repository;
 
-    private final static ArrayList<BigDecimal> denominations = new ArrayList(Arrays.asList(100, 200, 500));
+    private final static ArrayList<BigDecimal> denominations = new ArrayList(Arrays.asList(new BigDecimal("100"),
+            new BigDecimal("200"), new BigDecimal("500")));
 
     protected AbstractService(R repository) {
         this.repository = repository;
