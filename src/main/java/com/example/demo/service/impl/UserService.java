@@ -23,7 +23,6 @@ public class UserService extends AbstractService<User, UserRepository> {
         userRepository.findByName(entity);
     }
 
-    @Override
     public void sendMoneyToAnotherUser(User user, BigDecimal money) {
         BigDecimal currentBalance = user.getBalance();
         userRepository.findByName(user.getUserName());

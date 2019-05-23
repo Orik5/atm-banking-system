@@ -20,7 +20,6 @@ public class AtmService extends AbstractService<Atm, AtmRepository> {
         super(repository);
     }
 
-    @Override
     public void withdraw(Atm atm, BigDecimal money) throws RangeNotSatisfiableException {
 
         List<BigDecimal> denominations = getDenominations();
@@ -35,7 +34,7 @@ public class AtmService extends AbstractService<Atm, AtmRepository> {
         }
     }
 
-    @Override
+
     public void putCashIntoAtm(Atm atm, BigDecimal money) throws RangeNotSatisfiableException {
         List<BigDecimal> denominations = getDenominations();
         for (BigDecimal currentDenomination : denominations) {
@@ -45,7 +44,7 @@ public class AtmService extends AbstractService<Atm, AtmRepository> {
                 BigDecimal s = atm.getBalance().add(substr);
                 atm.setBalance(s);
             }
-          throw new RangeNotSatisfiableException("Incorrect amount requested");
+            throw new RangeNotSatisfiableException("Incorrect amount requested");
         }
     }
 }

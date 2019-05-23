@@ -14,13 +14,7 @@ public interface CommonService<E extends AbstractEntity, K, T, N> {
 
     void findById(K id);
 
-    void sendMoneyToAnotherUser(E entity, T type);
-
     void findByName(N value);
-
-    void withdraw(E entity, T type) throws RangeNotSatisfiableException;
-
-    void putCashIntoAtm(E entity, T type) throws RangeNotSatisfiableException;
 
     List<E> list();
 

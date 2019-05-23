@@ -43,10 +43,6 @@ public abstract class AbstractService<E extends AbstractEntity, R extends Common
     }
 
     @Override
-    public void sendMoneyToAnotherUser(E entity, BigDecimal type) {
-    }
-
-    @Override
     public void findByName(String entity) {
     }
 
@@ -55,13 +51,6 @@ public abstract class AbstractService<E extends AbstractEntity, R extends Common
         return repository.findAll();
     }
 
-    @Override
-    public void withdraw(E entity, BigDecimal type) throws RangeNotSatisfiableException {
-    }
-
-    @Override
-    public void putCashIntoAtm(E entity, BigDecimal type) throws RangeNotSatisfiableException {
-    }
 
     @Override
     public List<BigDecimal> getDenominations() {
