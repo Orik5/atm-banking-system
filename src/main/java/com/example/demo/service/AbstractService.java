@@ -13,7 +13,9 @@ import java.util.List;
 
 public abstract class AbstractService<E extends AbstractEntity, R extends CommonRepository<E, String>>
         implements CommonService<E, Integer, BigDecimal, String> {
+
     protected final R repository;
+
     private final static ArrayList<BigDecimal> denominations = new ArrayList(Arrays.asList(100, 200, 500));
 
     protected AbstractService(R repository) {
@@ -42,7 +44,6 @@ public abstract class AbstractService<E extends AbstractEntity, R extends Common
 
     @Override
     public void sendMoneyToAnotherUser(E entity, BigDecimal type) {
-
     }
 
     @Override
@@ -56,12 +57,10 @@ public abstract class AbstractService<E extends AbstractEntity, R extends Common
 
     @Override
     public void withdraw(E entity, BigDecimal type) throws RangeNotSatisfiableException {
-
     }
 
     @Override
     public void putCashIntoAtm(E entity, BigDecimal type) throws RangeNotSatisfiableException {
-
     }
 
     @Override

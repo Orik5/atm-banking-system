@@ -1,7 +1,9 @@
 package com.example.demo.controlller;
 
+import com.example.demo.domain.Atm;
 import com.example.demo.dto.AtmDto;
 import com.example.demo.domain.User;
+import com.example.demo.dto.UserDto;
 import com.example.demo.service.impl.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,38 +28,39 @@ public class UserController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     }
     )
-    @ApiOperation(value = "Get users", response = AtmDto.class)
+    @ApiOperation(value = "Get users", response = UserDto.class)
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public void findAll() {
         userService.list();
+
     }
 
-    @ApiOperation(value = "Get user by id", response = AtmDto.class)
+    @ApiOperation(value = "Get user by id", response = UserDto.class)
     @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
     public void findById(@PathVariable Integer id) {
         userService.findById(id);
 
     }
 
-    @ApiOperation(value = "Add user", response = AtmDto.class)
+    @ApiOperation(value = "Add user", response = UserDto.class)
     @RequestMapping(value = "/users", method = RequestMethod.POST)
     public void addUser(@RequestBody User user) {
-        userService.create(user);
+      userService.create(user);
     }
 
-    @ApiOperation(value = "Update user", response = AtmDto.class)
+    @ApiOperation(value = "Update user", response = UserDto.class)
     @RequestMapping(value = "/users", method = RequestMethod.PUT)
     public void updateUser(@RequestBody User user) {
         userService.saveOrUpdate(user);
     }
 
-    @ApiOperation(value = "Send money to another user", response = AtmDto.class)
+    @ApiOperation(value = "Send money to another user", response = UserDto.class)
     @RequestMapping(value = "/users/send-to-user", method = RequestMethod.POST)
     public void sendMoneyToAnotherUser(User user, BigDecimal money) {
         userService.sendMoneyToAnotherUser(user, money);
     }
 
-    @ApiOperation(value = "Delete user", response = AtmDto.class)
+    @ApiOperation(value = "Delete user", response = UserDto.class)
     @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
     public void deleteUser(@PathVariable Integer id) {
         userService.delete(id);

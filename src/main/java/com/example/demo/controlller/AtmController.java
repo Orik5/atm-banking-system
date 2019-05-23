@@ -33,13 +33,13 @@ public class AtmController {
     )
 
     @ApiOperation(value = "withdraw", response = AtmDto.class)
-    @RequestMapping(value = "/atms/withdraw", method = RequestMethod.POST)
+    @RequestMapping(value = "/atms/withdraw", method = RequestMethod.PUT)
     public void withdraw(Atm atm, BigDecimal money) throws RangeNotSatisfiableException {
         atmService.withdraw(atm, money);
     }
 
     @ApiOperation(value = "put-cash-into", response = AtmDto.class)
-    @RequestMapping(value = "/atms/put-cash-into", method = RequestMethod.POST)
+    @RequestMapping(value = "/atms/put-cash-into", method = RequestMethod.PUT)
     public void putCashIntoAtm(Atm atm, BigDecimal money) throws RangeNotSatisfiableException {
         atmService.putCashIntoAtm(atm, money);
     }

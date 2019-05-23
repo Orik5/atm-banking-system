@@ -1,10 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.AbstractEntity;
-import com.example.demo.domain.User;
 import com.example.demo.exception.RangeNotSatisfiableException;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public interface CommonService<E extends AbstractEntity, K, T, N> {

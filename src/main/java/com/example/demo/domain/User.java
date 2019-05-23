@@ -24,7 +24,6 @@ public class User extends AbstractEntity{
     private String middleName;
     private BigDecimal temporarySafeBalanceAfterGetting;
 
-
     public BigDecimal getBalance() {
         return balance;
     }
