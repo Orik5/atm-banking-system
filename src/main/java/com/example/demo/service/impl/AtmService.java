@@ -7,6 +7,7 @@ import com.example.demo.exception.IncorrectUserNameException;
 import com.example.demo.exception.RangeNotSatisfiableException;
 import com.example.demo.repository.AtmRepository;
 import com.example.demo.service.AbstractService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -16,7 +17,8 @@ import java.util.List;
 
 @Service
 public class AtmService extends AbstractService<Atm, AtmRepository> {
-
+    @Autowired
+    AtmRepository atmRepository;
 
     protected AtmService(AtmRepository repository) {
         super(repository);
@@ -31,7 +33,8 @@ public class AtmService extends AbstractService<Atm, AtmRepository> {
                     if ((atm.getBalance().intValue() > person.setBalance(money).intValue()) &&
                             person.setBalance(money).intValue() % currentDenomination.intValue() == 0) {
                         BigDecimal substr = atm.getBalance().subtract(person.setBalance(money));
-                        atm.setBalance(substr);
+                        atmRepository.setBalanceIntoAtm(atm.getId(), atm.setBalance(substr));
+
                     }
                     throw new RangeNotSatisfiableException("Incorrect amount requested");
                 }
@@ -52,7 +55,7 @@ public class AtmService extends AbstractService<Atm, AtmRepository> {
                         BigDecimal substrAtm = atm.getBalance().add(person.setBalance(money));
                         BigDecimal substrUser = person.getBalance().subtract(person.setBalance(money));
                         person.setBalance(substrUser);
-                        atm.setBalance(substrAtm);
+                        atmRepository.setBalanceIntoAtm(atm.getId(), atm.setBalance(substrAtm));
                     }
                     throw new EmptyBallanceException("Your balance is empty");
 

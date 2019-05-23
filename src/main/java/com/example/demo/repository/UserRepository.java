@@ -12,7 +12,7 @@ public interface UserRepository extends CommonRepository<User, String> {
     @Query(value = "SELECT user_name FROM user WHERE user_name = ?", nativeQuery = true)
     void getUserByUserName(String name);
 
-    @Query(value = "UPDATE user SET  balance =?  WHERE user_id = ?", nativeQuery = true)
+    @Query(value = "UPDATE atm_banking_system.user SET  balance =?  WHERE user_id = ?", nativeQuery = true)
     void setBalanceIntoUser(Integer id, BigDecimal money);
 
 }
