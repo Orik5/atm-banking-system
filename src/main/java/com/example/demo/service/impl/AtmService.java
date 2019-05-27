@@ -6,6 +6,7 @@ import com.example.demo.exception.EmptyBallanceException;
 import com.example.demo.exception.IncorrectUserNameException;
 import com.example.demo.exception.RangeNotSatisfiableException;
 import com.example.demo.repository.AtmRepository;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,12 +20,15 @@ import java.util.List;
 public class AtmService extends AbstractService<Atm, AtmRepository> {
     @Autowired
     AtmRepository atmRepository;
+    @Autowired
+    UserRepository userRepository;
 
     protected AtmService(AtmRepository repository) {
         super(repository);
     }
 
     public void withdraw(Atm atm, BigDecimal money, HashSet<User> users, String name) throws RangeNotSatisfiableException, IncorrectUserNameException {
+        users = new HashSet<>(userRepository.findAll());
         for (User person :
                 users) {
             if (person.getUserName().equals(name)) {
@@ -39,12 +43,13 @@ public class AtmService extends AbstractService<Atm, AtmRepository> {
                     throw new RangeNotSatisfiableException("Incorrect amount requested");
                 }
             }
-            throw new IncorrectUserNameException("Incorrect user name, please insert valid name");
         }
     }
 
 
     public void putCashIntoAtm(Atm atm, BigDecimal money, HashSet<User> users, String name) throws RangeNotSatisfiableException, IncorrectUserNameException, EmptyBallanceException {
+        atm = atmRepository.getOne(1);
+        users = new HashSet<>(userRepository.findAll());
         for (User person :
                 users) {
             if (person.getUserName().equals(name)) {

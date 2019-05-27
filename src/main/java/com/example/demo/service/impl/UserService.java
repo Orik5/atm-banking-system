@@ -41,17 +41,15 @@ public class UserService extends AbstractService<User, UserRepository> {
                             BigDecimal substrPerson2 = person.getBalance().subtract(person.setBalance(money));
                             person2.setBalance(addPerson1);
                             person.setBalance(substrPerson2);
-                            userRepository.setBalanceIntoUser(person2.getId(),person.setBalance(addPerson1));
-                            userRepository.setBalanceIntoUser(person.getId(),person.setBalance(substrPerson2));
-
+                            userRepository.setBalanceIntoUser(person2.getId(), person.setBalance(addPerson1));
+                            userRepository.setBalanceIntoUser(person.getId(), person.setBalance(substrPerson2));
                         }
                         throw new EmptyBallanceException("Your balance is empty");
-
                     }
-                    throw new IncorrectUserNameException("Incorrect user name, please insert valid name");
+
                 }
             }
-            throw new IncorrectUserNameException("Incorrect user name, please insert valid name");
+
         }
     }
 }

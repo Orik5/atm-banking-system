@@ -60,7 +60,7 @@ public class UserController {
     @ApiOperation(value = "Send money to another user", response = UserDto.class)
     @RequestMapping(value = "/users/send-to-user", method = RequestMethod.PUT)
     public void sendMoneyToAnotherUser(User user, BigDecimal money, HashSet<User> users, String myName, String username) throws EmptyBallanceException, IncorrectUserNameException {
-        userService.sendMoneyToAnotherUser(user,money, users, myName, username);
+        userService.sendMoneyToAnotherUser(user, money, users, myName, username);
     }
 
     @ApiOperation(value = "Delete user", response = UserDto.class)

@@ -13,8 +13,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "user")
-public class User extends AbstractEntity{
+public class User extends AbstractEntity {
 
     private String userName;
     private String password;

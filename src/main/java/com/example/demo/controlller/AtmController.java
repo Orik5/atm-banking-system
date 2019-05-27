@@ -38,14 +38,14 @@ public class AtmController {
 
     @ApiOperation(value = "withdraw", response = AtmDto.class)
     @RequestMapping(value = "/atms/withdraw", method = RequestMethod.PUT)
-    public void withdraw(Atm atm, BigDecimal money, HashSet<User>users,String name) throws RangeNotSatisfiableException, IncorrectUserNameException {
-        atmService.withdraw(atm, money,users,name);
+    public void withdraw(Atm atm, BigDecimal money, HashSet<User> users, String name) throws RangeNotSatisfiableException, IncorrectUserNameException {
+        atmService.withdraw(atm, money, users, name);
     }
 
     @ApiOperation(value = "put-cash-into", response = AtmDto.class)
     @RequestMapping(value = "/atms/put-cash-into", method = RequestMethod.PUT)
-    public void putCashIntoAtm(Atm atm, BigDecimal money,HashSet<User>users,String name) throws RangeNotSatisfiableException, EmptyBallanceException, IncorrectUserNameException {
-        atmService.putCashIntoAtm(atm, money,users,name);
+    public void putCashIntoAtm(Atm atm, BigDecimal money, HashSet<User> users, String name) throws RangeNotSatisfiableException, EmptyBallanceException, IncorrectUserNameException {
+        atmService.putCashIntoAtm(atm, money, users, name);
     }
 
 

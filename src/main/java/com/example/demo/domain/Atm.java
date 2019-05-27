@@ -13,7 +13,6 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "atm")
 public class Atm extends AbstractEntity {
 
     private BigDecimal balance;
