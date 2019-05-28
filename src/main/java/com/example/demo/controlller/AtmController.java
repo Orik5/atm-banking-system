@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +26,8 @@ import java.util.HashSet;
 
 public class AtmController {
 
-    @Autowired
+    @Autowired(required=true)
+    @Qualifier("atmService")
     private AtmService atmService;
 
     @ApiResponses(value = {

@@ -9,6 +9,7 @@ import com.example.demo.repository.AtmRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -19,8 +20,10 @@ import java.util.List;
 @Service
 public class AtmService extends AbstractService<Atm, AtmRepository> {
     @Autowired
+   // @Qualifier("atmRepository")
     AtmRepository atmRepository;
     @Autowired
+   // @Qualifier("userRepository")
     UserRepository userRepository;
 
     protected AtmService(AtmRepository repository) {

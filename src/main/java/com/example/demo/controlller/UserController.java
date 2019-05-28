@@ -65,8 +65,8 @@ public class UserController {
 
     @ApiOperation(value = "Delete user", response = UserDto.class)
     @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
-    public void deleteUser(@PathVariable Integer id) {
-        userService.delete(id);
+    public void deleteUser(@PathVariable User user) {
+        userService.delete(user);
     }
 
 

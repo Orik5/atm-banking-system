@@ -6,11 +6,11 @@ import com.example.demo.exception.RangeNotSatisfiableException;
 import java.util.List;
 
 public interface CommonService<E extends AbstractEntity, K, T, N> {
-    void create(E entity);
+    E create(E entity);
 
-    void saveOrUpdate(E entity);
+    E saveOrUpdate(E entity);
 
-    void delete(K id);
+    void delete(E entity);
 
     void findById(K id);
 

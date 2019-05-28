@@ -24,18 +24,18 @@ public abstract class AbstractService<E extends AbstractEntity, R extends Common
     }
 
     @Override
-    public void create(E entity) {
-        repository.save(entity);
+    public E create(E entity) {
+        return repository.save(entity);
     }
 
     @Override
-    public void saveOrUpdate(E entity) {
-        repository.save(entity);
+    public E saveOrUpdate(E entity) {
+        return repository.save(entity);
     }
 
     @Override
-    public void delete(Integer id) {
-        repository.deleteById(id);
+    public void delete(E entity) {
+        repository.delete(entity);
     }
 
     @Override
