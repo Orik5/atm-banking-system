@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.List;
 
 @RestController
 @RequestMapping("atm-banking-system")
@@ -31,10 +32,10 @@ public class UserController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     }
     )
-    @ApiOperation(value = "Get users", response = UserDto.class)
+    @ApiOperation(value = "Get users", response = Iterable.class)
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public void findAll() {
-        userService.list();
+    public List<User> findAll() {
+        return userService.list();
 
     }
 
@@ -47,14 +48,15 @@ public class UserController {
 
     @ApiOperation(value = "Add user", response = UserDto.class)
     @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public void addUser(@RequestBody User user) {
-        userService.create(user);
+    public UserDto create(@RequestBody User user) {
+        return UserDto.convertToDto(userService.create(user));
     }
 
     @ApiOperation(value = "Update user", response = UserDto.class)
     @RequestMapping(value = "/users", method = RequestMethod.PUT)
-    public void updateUser(@RequestBody User user) {
-        userService.saveOrUpdate(user);
+    public UserDto updateUser(@RequestBody User user) {
+
+        return UserDto.convertToDto(userService.saveOrUpdate(user));
     }
 
     @ApiOperation(value = "Send money to another user", response = UserDto.class)

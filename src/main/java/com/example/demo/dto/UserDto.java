@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserDto {
+public class UserDto{
 
     private Integer userId;
     private String userName;
@@ -26,8 +26,8 @@ public class UserDto {
     private String middleName;
     private BigDecimal temporarySafeBalanceAfterGetting;
 
-    public static void convertToDto(User user) {
-        new UserDto(user.getId(), user.getUserName(), user.getPassword(), user.getBalance(),
+    public static UserDto convertToDto(User user) {
+        return new UserDto(user.getId(), user.getUserName(), user.getPassword(), user.getBalance(),
                 user.getPassword(), user.getMobilePhone(), user.getMiddleName(), user
                 .getTemporarySafeBalanceAfterGetting());
 

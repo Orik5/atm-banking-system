@@ -28,6 +28,7 @@ public class UserService extends AbstractService<User, UserRepository> {
         userRepository.getUserByUserName(name);
     }
 
+
     public void sendMoneyToAnotherUser(User user, BigDecimal money, HashSet<User> users, String myName, String username) throws IncorrectUserNameException, EmptyBallanceException {
         users = new HashSet<>(userRepository.findAll());
         logger.debug(users);

@@ -49,6 +49,7 @@ public abstract class AbstractService<E extends AbstractEntity, R extends Common
 
     @Override
     public List<E> list() {
+
         return repository.findAll();
     }
 
