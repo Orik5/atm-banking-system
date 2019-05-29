@@ -24,6 +24,7 @@ public class UserService extends AbstractService<User, UserRepository> {
         super(repository);
     }
 
+
     public void findByName(String name) {
         userRepository.getUserByUserName(name);
     }

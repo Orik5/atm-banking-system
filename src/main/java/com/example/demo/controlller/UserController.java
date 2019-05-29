@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,7 @@ import java.util.List;
 @RequestMapping("atm-banking-system")
 @Api(value = "atm-banking-system")
 public class UserController {
+    final static Logger logger = Logger.getLogger(UserController.class);
     @Autowired
     UserService userService;
 
@@ -55,7 +57,6 @@ public class UserController {
     @ApiOperation(value = "Update user", response = UserDto.class)
     @RequestMapping(value = "/users", method = RequestMethod.PUT)
     public UserDto updateUser(@RequestBody User user) {
-
         return UserDto.convertToDto(userService.saveOrUpdate(user));
     }
 
@@ -67,7 +68,8 @@ public class UserController {
 
     @ApiOperation(value = "Delete user", response = UserDto.class)
     @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
-    public void deleteUser(@PathVariable User user) {
+    public void deleteUser(@PathVariable("id") User user) {
+        logger.info(user);
         userService.delete(user);
     }
 

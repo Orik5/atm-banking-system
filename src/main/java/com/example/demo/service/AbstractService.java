@@ -6,10 +6,14 @@ import com.example.demo.exception.RangeNotSatisfiableException;
 import com.example.demo.repository.CommonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TransactionRequiredException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public abstract class AbstractService<E extends AbstractEntity, R extends CommonRepository<E, String>>
         implements CommonService<E, Integer, BigDecimal, String> {
@@ -23,6 +27,10 @@ public abstract class AbstractService<E extends AbstractEntity, R extends Common
         this.repository = repository;
     }
 
+
+    @PersistenceContext(name = "footprint")
+    protected transient EntityManager manager;
+
     @Override
     public E create(E entity) {
         return repository.save(entity);
@@ -34,7 +42,8 @@ public abstract class AbstractService<E extends AbstractEntity, R extends Common
     }
 
     @Override
-    public void delete(E entity) {
+    public void delete(E entity) throws IllegalStateException,
+            IllegalArgumentException, TransactionRequiredException {
         repository.delete(entity);
     }
 

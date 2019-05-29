@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.sql.Statement;
 
@@ -16,5 +17,6 @@ public interface UserRepository extends CommonRepository<User, String> {
     @Modifying
     @Query(value = "UPDATE atm_banking_system.user SET  balance =?  WHERE user_id = ?", nativeQuery = true)
     void setBalanceIntoUser(Integer id, BigDecimal money);
+
 
 }

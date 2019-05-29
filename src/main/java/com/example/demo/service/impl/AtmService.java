@@ -20,11 +20,11 @@ import java.util.List;
 @Service
 public class AtmService extends AbstractService<Atm, AtmRepository> {
     @Autowired
-   // @Qualifier("atmRepository")
-    AtmRepository atmRepository;
+    // @Qualifier("atmRepository")
+            AtmRepository atmRepository;
     @Autowired
-   // @Qualifier("userRepository")
-    UserRepository userRepository;
+    // @Qualifier("userRepository")
+            UserRepository userRepository;
 
     protected AtmService(AtmRepository repository) {
         super(repository);
