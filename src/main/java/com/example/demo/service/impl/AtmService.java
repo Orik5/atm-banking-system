@@ -32,18 +32,40 @@ public class AtmService extends AbstractService<Atm, AtmRepository> {
 
     public void withdraw(Atm atm, BigDecimal money, HashSet<User> users, String name) throws RangeNotSatisfiableException, IncorrectUserNameException {
         users = new HashSet<>(userRepository.findAll());
+
+        /* for (User person :
+                users) {
+            if (person.getUserName().equals(myName)) {
+                userRepository.getUserByUserName(myName);
+                for (User person2 : users
+                ) {
+                    if (person2.getUserName().equals(username)) {
+                        userRepository.getUserByUserName(username);
+                        if ((person.getBalance().compareTo(money) > 0)) {
+                            logger.info("wait");
+                            BigDecimal addPerson1 = person2.getBalance().add(money);
+                            BigDecimal substrPerson2 = person.getBalance().subtract(money);
+                            person2.setBalance(addPerson1);
+                            person.setBalance(substrPerson2);
+
+
+               */
         for (User person :
                 users) {
             if (person.getUserName().equals(name)) {
                 List<BigDecimal> denominations = getDenominations();
                 for (BigDecimal currentDenomination : denominations) {
-                    if ((atm.getBalance().intValue() > person.setBalance(money).intValue()) &&
-                            person.setBalance(money).intValue() % currentDenomination.intValue() == 0) {
-                        BigDecimal substr = atm.getBalance().subtract(person.setBalance(money));
-                        atmRepository.setBalanceIntoAtm(atm.getId(), atm.setBalance(substr));
+                    if ((atm.getBalance().intValue() > money.intValue()) &&
+                            money.intValue() % currentDenomination.intValue() == 0) {
+
+                        BigDecimal addPerson1 = person.getBalance().add(money);
+                        //BigDecimal substrPerson2 = person.getBalance().subtract(money);
+                        BigDecimal substr = atm.getBalance().subtract(money);
+
+                        // atmRepository.setBalanceIntoAtm(atm.getId(), atm.setBalance(substr));
 
                     }
-                    throw new RangeNotSatisfiableException("Incorrect amount requested");
+                    // throw new RangeNotSatisfiableException("Incorrect amount requested");
                 }
             }
         }

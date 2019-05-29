@@ -9,6 +9,7 @@ import com.example.demo.service.AbstractService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.sql.Statement;
@@ -29,7 +30,7 @@ public class UserService extends AbstractService<User, UserRepository> {
         userRepository.getUserByUserName(name);
     }
 
-
+    @Transactional
     public void sendMoneyToAnotherUser(User user, BigDecimal money, HashSet<User> users, String myName, String username) throws IncorrectUserNameException, EmptyBallanceException {
         users = new HashSet<>(userRepository.findAll());
         logger.debug(users);
@@ -41,16 +42,18 @@ public class UserService extends AbstractService<User, UserRepository> {
                 ) {
                     if (person2.getUserName().equals(username)) {
                         userRepository.getUserByUserName(username);
-                        if ((person.getBalance().compareTo(person.setBalance(money))) > 0) {
-                            BigDecimal addPerson1 = person.setBalance(money).add(person2.getBalance());
-                            BigDecimal substrPerson2 = person.getBalance().subtract(person.setBalance(money));
+                        if ((person.getBalance().compareTo(money) > 0)) {
+                            logger.info("wait");
+                            BigDecimal addPerson1 = person2.getBalance().add(money);
+                            BigDecimal substrPerson2 = person.getBalance().subtract(money);
                             person2.setBalance(addPerson1);
                             person.setBalance(substrPerson2);
-                            userRepository.setBalanceIntoUser(person2.getId(), person.setBalance(addPerson1));
-                            userRepository.setBalanceIntoUser(person.getId(), person.setBalance(substrPerson2));
-
+                            logger.debug(person2.getBalance());
+                            logger.debug(person.getBalance());
+                        } else {
+                            throw new EmptyBallanceException("Your balance is empty");
                         }
-                        //throw new EmptyBallanceException("Your balance is empty");
+
                     }
 
                 }
