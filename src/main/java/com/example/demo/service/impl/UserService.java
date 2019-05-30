@@ -38,12 +38,10 @@ public class UserService extends AbstractService<User, UserRepository> {
                 users) {
             if (person.getUserName().equals(myName)) {
                 userRepository.getUserByUserName(myName);
-                for (User person2 : users
-                ) {
+                for (User person2 : users) {
                     if (person2.getUserName().equals(username)) {
                         userRepository.getUserByUserName(username);
                         if ((person.getBalance().compareTo(money) > 0)) {
-                            logger.info("wait");
                             BigDecimal addPerson1 = person2.getBalance().add(money);
                             BigDecimal substrPerson2 = person.getBalance().subtract(money);
                             person2.setBalance(addPerson1);

@@ -3,6 +3,7 @@ package com.example.demo.controlller;
 import com.example.demo.domain.User;
 import com.example.demo.dto.AtmDto;
 import com.example.demo.domain.Atm;
+import com.example.demo.dto.UserDto;
 import com.example.demo.exception.EmptyBallanceException;
 import com.example.demo.exception.IncorrectUserNameException;
 import com.example.demo.exception.RangeNotSatisfiableException;
@@ -13,6 +14,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +28,7 @@ import java.util.HashSet;
 
 public class AtmController {
 
-    @Autowired(required=true)
+    @Autowired(required = true)
     @Qualifier("atmService")
     private AtmService atmService;
 
@@ -40,14 +42,14 @@ public class AtmController {
 
     @ApiOperation(value = "withdraw", response = AtmDto.class)
     @RequestMapping(value = "/atms/withdraw", method = RequestMethod.PUT)
-    public void withdraw(Atm atm, BigDecimal money, HashSet<User> users, String name) throws RangeNotSatisfiableException, IncorrectUserNameException {
-        atmService.withdraw(atm, money, users, name);
+    public void withdraw(HashSet<Atm> atms, BigDecimal money, HashSet<User> users, String name) throws RangeNotSatisfiableException, IncorrectUserNameException {
+        atmService.withdraw(atms, money, users, name);
     }
 
     @ApiOperation(value = "put-cash-into", response = AtmDto.class)
     @RequestMapping(value = "/atms/put-cash-into", method = RequestMethod.PUT)
-    public void putCashIntoAtm(Atm atm, BigDecimal money, HashSet<User> users, String name) throws RangeNotSatisfiableException, EmptyBallanceException, IncorrectUserNameException {
-        atmService.putCashIntoAtm(atm, money, users, name);
+    public void putCashIntoAtm(HashSet<Atm> atms, BigDecimal money, HashSet<User> users, String name) throws RangeNotSatisfiableException, EmptyBallanceException, IncorrectUserNameException {
+        atmService.putCashIntoAtm(atms, money, users, name);
     }
 
 
